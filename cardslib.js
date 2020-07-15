@@ -29,8 +29,12 @@ class Card {
 class Deck {
     constructor (){
         this.cards = []
+        this.drawPile = []
+        this.discardPile = []
         const ranks = "A23456789TJQK"
         const suits = "♠️♦️♣️♥️" // Emoji! They take up two characters each
+
+        // Populate the cards array in new-deck order
         for (let s=0; s<suits.length/2; s+=2) { // +2 to account for emoji
             for (let r=0; r<ranks.length; r++)
                 this.cards.push(new Card(ranks[r], suits[s]))
@@ -44,17 +48,17 @@ class Deck {
         let cards = this.cards.map(card => card.val())
         return cards.join(" ")
     }
-    deal (numCards, numPlayers) {
-        let players = new Array(numPlayers)
+    deal (numCards, numHands) {
+        let handsArr = new Array(numHands)
         for (let cardNum = 0; cardNum< numCards; cardNum++) {
 
-            for (let playerNum=0; playerNum<players.length; playerNum++) {
-                if (!Array.isArray(players[playerNum])) {
-                    players[playerNum] = []
+            for (let handNum=0; handNum<players.length; handNum++) {
+                if (!Array.isArray(players[handNum])) { // first card for this hand
+                    handsArr[handNum] = []
                 }
-                players[playerNum].push(this.cards.shift())
+                handsArr[handNum].push(this.cards.shift())
             }
         }
-        return players
+        return handsArr
     }
 }
