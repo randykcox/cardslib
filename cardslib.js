@@ -27,13 +27,13 @@ class Deck {
     constructor (){
         this.cards = []
         const ranks = "A23456789TJQK"
-        const suits = "SDCH"
-        for (let s=0; s<suits.length; s++) {
+        const suits = "♠️♦️♣️♥️" // Emoji! They take up two characters each
+        for (let s=0; s<suits.length; s+=2) { // +2 to account for emoji
             for (let r=0; r<ranks.length; r++)
                 this.cards.push(new Card(ranks[r], suits[s]))
         }
     }
-    spread () {
+    fan () {
         let cards = this.cards.map(card => card.val())
         return cards.join(" ")
     }
