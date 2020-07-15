@@ -55,6 +55,7 @@ Deck {
     randomShuffle()
     riffleShuffle()
     deal(numCards, numPlayers)
+    fan()
 }
 
 Game {

@@ -7,6 +7,9 @@ class Card {
     val () {
         return this.rank + this.suit
     }
+    toString() {
+        return this.val()
+    }
     look () {
         this.state = "hidden"
         return this.playerView()
@@ -40,5 +43,18 @@ class Deck {
     fan () {
         let cards = this.cards.map(card => card.val())
         return cards.join(" ")
+    }
+    deal (numCards, numPlayers) {
+        let players = new Array(numPlayers)
+        for (let cardNum = 0; cardNum< numCards; cardNum++) {
+
+            for (let playerNum=0; playerNum<players.length; playerNum++) {
+                if (!Array.isArray(players[playerNum])) {
+                    players[playerNum] = []
+                }
+                players[playerNum].push(this.cards.shift())
+            }
+        }
+        return players
     }
 }
