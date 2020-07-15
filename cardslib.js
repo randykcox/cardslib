@@ -28,8 +28,12 @@ class Deck {
         this.cards = []
         const ranks = "A23456789TJQK"
         const suits = "♠️♦️♣️♥️" // Emoji! They take up two characters each
-        for (let s=0; s<suits.length; s+=2) { // +2 to account for emoji
+        for (let s=0; s<suits.length/2; s+=2) { // +2 to account for emoji
             for (let r=0; r<ranks.length; r++)
+                this.cards.push(new Card(ranks[r], suits[s]))
+        }
+        for (let s=suits.length/2; s<suits.length; s+=2) { // +2 to account for emoji
+            for (let r=ranks.length-1; r>=0; r--)
                 this.cards.push(new Card(ranks[r], suits[s]))
         }
     }
